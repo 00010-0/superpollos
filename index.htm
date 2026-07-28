@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Super Pollo — Comida para llevar · Pollos asados</title>
+<meta name="description" content="Super Pollo — pollos asados a l'ast, lechona, paella y comida casera para llevar. Encarga por teléfono y recoge en tienda.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rojo:#D8232A;
+  --rojo-osc:#A81720;
+  --azul:#1B3A73;
+  --azul-osc:#12294F;
+  --crema:#F7F1E3;
+  --crema-2:#FBF7EE;
+  --blanco:#FFFFFF;
+  --tinta:#22262B;
+  --gris:#6E737B;
+  --linea:#E4DDCB;
+  --sombra:0 4px 20px rgba(18,41,79,.08);
+  --sombra-alta:0 18px 44px rgba(18,41,79,.16);
+  --radio:18px;
+  --max:1180px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:'Nunito',system-ui,-apple-system,sans-serif;
+  color:var(--tinta);
+  background:var(--crema);
+  line-height:1.6;
+  overflow-x:hidden;
+}
+h1,h2,h3,.display{font-family:'Baloo 2',cursive;line-height:1.1;letter-spacing:-.01em}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.wrap{width:100%;max-width:var(--max);margin:0 auto;padding:0 20px}
+
+/* ---------- BOTONES ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:9px;
+  font-family:'Baloo 2',cursive;font-size:1.02rem;font-weight:700;
+  padding:13px 26px;border-radius:999px;border:2px solid transparent;
+  cursor:pointer;transition:transform .22s cubic-bezier(.2,.8,.3,1),box-shadow .22s,background .22s,color .22s;
+  white-space:nowrap;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn-rojo{background:var(--rojo);color:#fff;box-shadow:0 8px 18px rgba(216,35,42,.28)}
+.btn-rojo:hover{background:var(--rojo-osc);box-shadow:0 12px 26px rgba(216,35,42,.36)}
+.btn-azul{background:var(--azul);color:#fff;box-shadow:0 8px 18px rgba(27,58,115,.24)}
+.btn-azul:hover{background:var(--azul-osc)}
+.btn-linea{background:transparent;color:var(--azul);border-color:var(--azul)}
+.btn-linea:hover{background:var(--azul);color:#fff}
+
+/* ---------- CABECERA ---------- */
+header{
+  position:sticky;top:0;z-index:60;
+  background:rgba(247,241,227,.92);
+  backdrop-filter:saturate(160%) blur(12px);
+  border-bottom:1px solid var(--linea);
+}
+.nav{display:flex;align-items:center;gap:18px;height:76px}
+.marca{display:flex;align-items:center;gap:11px;margin-right:auto}
+.marca svg{width:46px;height:46px;flex:none}
+.marca-txt strong{
+  display:block;font-family:'Baloo 2',cursive;font-size:1.4rem;font-weight:800;
+  color:var(--rojo);letter-spacing:.4px;line-height:1;text-transform:uppercase;
+}
+.marca-txt span{display:block;font-size:.63rem;font-weight:700;color:var(--azul);letter-spacing:.9px;text-transform:uppercase;margin-top:2px}
+.menu-nav{display:flex;gap:6px}
+.menu-nav a{
+  font-weight:700;font-size:.94rem;color:var(--azul);
+  padding:8px 14px;border-radius:999px;transition:background .2s,color .2s;
+}
+.menu-nav a:hover{background:var(--azul);color:#fff}
+
+.idiomas{display:flex;gap:3px;background:var(--blanco);border:1px solid var(--linea);border-radius:999px;padding:3px}
+.idiomas button{
+  font-family:'Nunito',sans-serif;font-weight:800;font-size:.74rem;letter-spacing:.5px;
+  border:0;background:transparent;color:var(--gris);cursor:pointer;
+  padding:6px 11px;border-radius:999px;transition:background .2s,color .2s;
+}
+.idiomas button:hover{color:var(--azul)}
+.idiomas button.on{background:var(--rojo);color:#fff}
+
+.hamburguesa{display:none;width:44px;height:44px;border:0;background:transparent;cursor:pointer;flex-direction:column;gap:5px;align-items:center;justify-content:center}
+.hamburguesa span{display:block;width:23px;height:2.5px;background:var(--azul);border-radius:2px;transition:transform .3s,opacity .2s}
+.hamburguesa.abierto span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
+.hamburguesa.abierto span:nth-child(2){opacity:0}
+.hamburguesa.abierto span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
+
+/* ---------- HERO ---------- */
+.hero{position:relative;padding:76px 0 88px;overflow:hidden}
+.hero::before{
+  content:"";position:absolute;inset:0;z-index:0;
+  background:
+    radial-gradient(760px 420px at 82% 18%, rgba(216,35,42,.10), transparent 62%),
+    radial-gradient(680px 460px at 12% 84%, rgba(27,58,115,.10), transparent 62%);
+}
+.hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1.08fr .92fr;gap:52px;align-items:center}
+.etiqueta{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--blanco);border:1.5px solid var(--rojo);color:var(--rojo);
+  font-weight:800;font-size:.76rem;letter-spacing:1.1px;text-transform:uppercase;
+  padding:7px 16px;border-radius:999px;box-shadow:var(--sombra);
+}
+.hero h1{font-size:clamp(2.7rem,6.2vw,4.5rem);color:var(--azul);margin:20px 0 0}
+.hero h1 em{font-style:normal;color:var(--rojo);display:block}
+.hero p.lead{font-size:1.14rem;color:var(--gris);max-width:44ch;margin:20px 0 30px}
+.hero-acciones{display:flex;flex-wrap:wrap;gap:12px}
+.hero-datos{display:flex;flex-wrap:wrap;gap:26px;margin-top:38px;padding-top:26px;border-top:1px dashed var(--linea)}
+.dato strong{display:block;font-family:'Baloo 2',cursive;font-size:1.75rem;color:var(--rojo);line-height:1}
+.dato span{font-size:.8rem;font-weight:700;color:var(--gris);text-transform:uppercase;letter-spacing:.6px}
+
+.hero-arte{position:relative;display:flex;align-items:center;justify-content:center}
+.disco{
+  width:min(400px,100%);aspect-ratio:1;border-radius:50%;
+  background:linear-gradient(150deg,var(--rojo) 0%,var(--rojo-osc) 100%);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:var(--sombra-alta);position:relative;
+}
+.disco::after{content:"";position:absolute;inset:16px;border:3px dashed rgba(255,255,255,.28);border-radius:50%}
+.disco svg{width:62%;height:62%;position:relative;z-index:2}
+.burbuja{
+  position:absolute;background:var(--blanco);border-radius:16px;padding:12px 17px;
+  box-shadow:var(--sombra-alta);font-weight:800;font-size:.86rem;color:var(--azul);
+  display:flex;align-items:center;gap:9px;white-space:nowrap;
+}
+.burbuja b{font-family:'Baloo 2',cursive;font-size:1.28rem;color:var(--rojo);line-height:1}
+.burbuja.b1{top:6%;left:-4%}
+.burbuja.b2{bottom:12%;right:-6%}
+.burbuja.b3{bottom:-2%;left:6%}
+
+/* ---------- CINTA ---------- */
+.cinta{background:var(--azul);color:#fff;padding:15px 0;overflow:hidden;white-space:nowrap}
+.cinta-pista{display:inline-flex;gap:44px;animation:desliza 26s linear infinite;will-change:transform}
+.cinta span{font-family:'Baloo 2',cursive;font-size:1.1rem;font-weight:700;letter-spacing:.6px;display:inline-flex;align-items:center;gap:44px}
+.cinta span::after{content:"●";color:var(--rojo);font-size:.7rem}
+@keyframes desliza{to{transform:translateX(-50%)}}
+
+/* ---------- SECCIONES ---------- */
+section{padding:88px 0}
+.cabecera-sec{text-align:center;max-width:640px;margin:0 auto 46px}
+.cabecera-sec .kicker{
+  font-weight:800;font-size:.78rem;letter-spacing:1.6px;text-transform:uppercase;color:var(--rojo);
+  display:block;margin-bottom:10px;
+}
+.cabecera-sec h2{font-size:clamp(2rem,4.4vw,3rem);color:var(--azul)}
+.cabecera-sec p{color:var(--gris);margin-top:12px;font-size:1.04rem}
+
+/* ---------- CARTA ---------- */
+#carta{background:var(--crema-2)}
+.filtros{display:flex;flex-wrap:wrap;justify-content:center;gap:9px;margin-bottom:38px}
+.filtros button{
+  font-family:'Baloo 2',cursive;font-weight:700;font-size:.98rem;
+  padding:10px 21px;border-radius:999px;cursor:pointer;
+  border:2px solid var(--linea);background:var(--blanco);color:var(--azul);
+  transition:all .22s cubic-bezier(.2,.8,.3,1);
+}
+.filtros button:hover{border-color:var(--rojo);color:var(--rojo);transform:translateY(-2px)}
+.filtros button.on{background:var(--rojo);border-color:var(--rojo);color:#fff;box-shadow:0 8px 18px rgba(216,35,42,.26)}
+
+.grupos{display:grid;gap:44px}
+.grupo h3{
+  font-size:1.6rem;color:var(--rojo);margin-bottom:18px;
+  display:flex;align-items:center;gap:12px;
+}
+.grupo h3::after{content:"";flex:1;height:2px;background:repeating-linear-gradient(90deg,var(--linea) 0 8px,transparent 8px 14px)}
+.platos{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px}
+.plato{
+  background:var(--blanco);border:1px solid var(--linea);border-radius:14px;
+  padding:15px 18px;display:flex;align-items:flex-start;gap:14px;
+  transition:transform .22s cubic-bezier(.2,.8,.3,1),box-shadow .22s,border-color .22s;
+}
+.plato:hover{transform:translateY(-3px);box-shadow:var(--sombra);border-color:#D9CFB6}
+.plato-txt{flex:1;min-width:0}
+.plato-nombre{font-weight:800;font-size:1.02rem;color:var(--azul);display:block}
+.plato-nota{font-size:.82rem;color:var(--gris);margin-top:2px;display:block}
+.plato-precio{
+  font-family:'Baloo 2',cursive;font-weight:800;font-size:1.14rem;color:var(--rojo);
+  white-space:nowrap;padding-top:1px;text-align:right;
+}
+.plato-precio small{display:block;font-size:.7rem;color:var(--gris);font-weight:600;font-family:'Nunito',sans-serif}
+.marca-encargo{
+  display:inline-block;background:#FFF0D6;color:#A66A00;border:1px solid #F0D9A8;
+  font-size:.66rem;font-weight:800;letter-spacing:.5px;text-transform:uppercase;
+  padding:2px 8px;border-radius:999px;margin-top:6px;
+}
+
+/* tabla de bebidas */
+.tabla-bebidas{background:var(--blanco);border:1px solid var(--linea);border-radius:14px;overflow:hidden}
+.tabla-bebidas table{width:100%;border-collapse:collapse;font-size:.95rem}
+.tabla-bebidas th{
+  background:var(--azul);color:#fff;font-weight:800;font-size:.76rem;
+  letter-spacing:.8px;text-transform:uppercase;padding:12px 16px;text-align:right;
+}
+.tabla-bebidas th:first-child{text-align:left}
+.tabla-bebidas td{padding:11px 16px;border-top:1px solid var(--linea);text-align:right;font-weight:700;color:var(--rojo)}
+.tabla-bebidas td:first-child{text-align:left;color:var(--azul);font-weight:700}
+.tabla-bebidas tbody tr{transition:background .18s}
+.tabla-bebidas tbody tr:hover{background:#FDFAF2}
+.tabla-bebidas td.vacio{color:var(--linea)}
+
+/* ---------- MENUS ---------- */
+#menus{background:var(--azul);color:#fff;position:relative;overflow:hidden}
+#menus::before{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(700px 400px at 88% 10%,rgba(216,35,42,.30),transparent 60%);
+}
+#menus .wrap{position:relative;z-index:1}
+#menus .cabecera-sec h2{color:#fff}
+#menus .cabecera-sec p{color:rgba(255,255,255,.74)}
+.tarjetas-menu{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;align-items:start}
+.tarjeta-menu{
+  background:var(--blanco);color:var(--tinta);border-radius:var(--radio);
+  padding:30px;box-shadow:var(--sombra-alta);position:relative;
+  transition:transform .28s cubic-bezier(.2,.8,.3,1);
+}
+.tarjeta-menu:hover{transform:translateY(-6px)}
+.tarjeta-menu .icono{font-size:2rem;line-height:1}
+.tarjeta-menu h3{font-size:1.85rem;color:var(--azul);margin:10px 0 4px}
+.tarjeta-menu .personas{font-size:.8rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--gris)}
+.precio-grande{
+  font-family:'Baloo 2',cursive;font-size:3.1rem;font-weight:800;color:var(--rojo);
+  line-height:1;margin:16px 0 18px;
+}
+.tarjeta-menu ul{list-style:none;display:grid;gap:8px;margin-bottom:18px}
+.tarjeta-menu li{display:flex;gap:10px;align-items:flex-start;font-size:.96rem}
+.tarjeta-menu li::before{content:"✓";color:var(--rojo);font-weight:900;flex:none}
+.extra{
+  background:var(--crema);border-radius:12px;padding:13px 16px;
+  font-size:.86rem;color:var(--azul);font-weight:700;border-left:4px solid var(--rojo);
+}
+.extra + .extra{margin-top:9px}
+
+/* ---------- ENCARGO ---------- */
+.pasos{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px}
+.paso{
+  background:var(--blanco);border:1px solid var(--linea);border-radius:var(--radio);
+  padding:28px 24px;text-align:center;position:relative;
+  transition:transform .24s cubic-bezier(.2,.8,.3,1),box-shadow .24s;
+}
+.paso:hover{transform:translateY(-5px);box-shadow:var(--sombra)}
+.paso .num{
+  width:48px;height:48px;border-radius:50%;background:var(--rojo);color:#fff;
+  font-family:'Baloo 2',cursive;font-size:1.5rem;font-weight:800;
+  display:flex;align-items:center;justify-content:center;margin:0 auto 15px;
+}
+.paso h3{font-size:1.25rem;color:var(--azul);margin-bottom:8px}
+.paso p{font-size:.95rem;color:var(--gris)}
+.aviso-llegada{
+  margin-top:30px;background:var(--blanco);border:2px dashed var(--rojo);border-radius:var(--radio);
+  padding:22px 26px;display:flex;align-items:center;gap:18px;justify-content:center;text-align:center;flex-wrap:wrap;
+}
+.aviso-llegada strong{font-family:'Baloo 2',cursive;font-size:1.32rem;color:var(--rojo);text-transform:uppercase;letter-spacing:.6px}
+.aviso-llegada span{color:var(--azul);font-weight:700}
+
+/* ---------- VISITA ---------- */
+#visita{background:var(--crema-2)}
+.visita-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.bloque{background:var(--blanco);border:1px solid var(--linea);border-radius:var(--radio);padding:30px;box-shadow:var(--sombra)}
+.bloque h3{font-size:1.45rem;color:var(--azul);margin-bottom:18px;display:flex;align-items:center;gap:10px}
+.horas{list-style:none;display:grid;gap:2px}
+.horas li{display:flex;justify-content:space-between;gap:14px;padding:11px 0;border-bottom:1px dashed var(--linea);font-size:.97rem}
+.horas li:last-child{border-bottom:0}
+.horas .dia{font-weight:700;color:var(--azul)}
+.horas .rango{font-weight:700;color:var(--rojo);text-align:right}
+.contacto{list-style:none;display:grid;gap:15px}
+.contacto li{display:flex;gap:14px;align-items:flex-start}
+.contacto .ico{
+  width:40px;height:40px;flex:none;border-radius:11px;background:var(--crema);
+  display:flex;align-items:center;justify-content:center;font-size:1.15rem;
+}
+.contacto .et{display:block;font-size:.74rem;font-weight:800;letter-spacing:.9px;text-transform:uppercase;color:var(--gris)}
+.contacto .val{font-weight:700;color:var(--azul);font-size:1.02rem}
+.contacto a.val:hover{color:var(--rojo)}
+
+/* ---------- PIE ---------- */
+footer{background:var(--azul-osc);color:rgba(255,255,255,.72);padding:52px 0 26px}
+.pie-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:36px;margin-bottom:34px}
+footer .marca-txt strong{color:#fff}
+footer .marca-txt span{color:var(--rojo)}
+.pie-col h4{font-family:'Baloo 2',cursive;font-size:1.1rem;color:#fff;margin-bottom:13px}
+.pie-col ul{list-style:none;display:grid;gap:8px;font-size:.93rem}
+.pie-col a:hover{color:#fff}
+.pie-desc{margin-top:14px;font-size:.93rem;max-width:34ch}
+.pie-abajo{border-top:1px solid rgba(255,255,255,.12);padding-top:22px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:.85rem}
+
+.pendiente{
+  outline:2px dashed rgba(216,35,42,.45);outline-offset:2px;border-radius:5px;
+  background:rgba(216,35,42,.06);padding:0 3px;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width:960px){
+  .hero .wrap{grid-template-columns:1fr;gap:44px}
+  .hero-arte{order:-1}
+  .disco{width:min(320px,80%)}
+  .visita-grid{grid-template-columns:1fr}
+  .pie-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:780px){
+  .hamburguesa{display:flex}
+  .menu-nav{
+    position:absolute;top:76px;left:0;right:0;
+    background:var(--crema-2);border-bottom:1px solid var(--linea);
+    flex-direction:column;gap:2px;padding:14px 20px 20px;
+    box-shadow:var(--sombra);
+    display:none;
+  }
+  .menu-nav.abierto{display:flex}
+  .menu-nav a{padding:12px 14px;border-radius:12px}
+  section{padding:64px 0}
+  .hero{padding:52px 0 64px}
+  .burbuja.b1{left:-2%;top:2%}
+  .burbuja.b2{right:-2%}
+  .platos{grid-template-columns:1fr}
+  .tabla-bebidas{overflow-x:auto}
+  .pie-grid{grid-template-columns:1fr}
+  .hero-datos{gap:20px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ CABECERA ============ -->
+<header>
+  <div class="wrap nav">
+    <a href="#inicio" class="marca">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <circle cx="50" cy="50" r="47" fill="#1B3A73"/>
+        <circle cx="50" cy="50" r="40" fill="#F7F1E3"/>
+        <path d="M62 24c3-6 9-8 13-5-1 5-4 7-7 8 5-1 10 1 11 6-5 2-9 1-12-1 4 2 7 6 6 11-5 0-9-3-11-7z" fill="#D8232A"/>
+        <path d="M38 40c0-11 9-19 20-19s20 8 20 19c0 9-5 15-12 18l3 21H30l4-21c-6-3-9-9-9-14 0-2 1-4 3-4h10z" fill="#D8232A"/>
+        <circle cx="55" cy="36" r="3.4" fill="#F7F1E3"/>
+        <circle cx="56" cy="36" r="1.6" fill="#12294F"/>
+        <path d="M78 40l11 4-11 5z" fill="#F2A93B"/>
+        <path d="M60 52c0-4 4-7 9-7s9 3 9 8-4 8-9 8-9-4-9-9z" fill="#F7F1E3"/>
+        <path d="M69 51l2 5h5l-4 3 1 5-4-3-4 3 1-5-4-3h5z" fill="#D8232A"/>
+      </svg>
+      <span class="marca-txt">
+        <strong>Super Pollo</strong>
+        <span data-i18n="tagline">Comida para llevar · Pollos asados</span>
+      </span>
+    </a>
+
+    <nav class="menu-nav" id="menuNav">
+      <a href="#carta" data-i18n="nav_carta">La carta</a>
+      <a href="#menus" data-i18n="nav_menus">Menús</a>
+      <a href="#encargo" data-i18n="nav_encargo">Encargos</a>
+      <a href="#visita" data-i18n="nav_visita">Visítanos</a>
+    </nav>
+
+    <div class="idiomas" role="group" aria-label="Idioma">
+      <button data-lang="es" class="on">ES</button>
+      <button data-lang="en">EN</button>
+      <button data-lang="de">DE</button>
+    </div>
+
+    <button class="hamburguesa" id="hamburguesa" aria-label="Menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<main id="inicio">
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-txt">
+      <span class="etiqueta" data-i18n="hero_badge">🔥 Asados al momento cada día</span>
+      <h1><span data-i18n="hero_h1a">Pollo a l'ast</span><em data-i18n="hero_h1b">recién hecho</em></h1>
+      <p class="lead" data-i18n="hero_lead">Pollos asados a la brasa, lechona, paella los domingos y comida casera para llevar. Encarga por teléfono y recógelo caliente.</p>
+      <div class="hero-acciones">
+        <a href="tel:+34000000000" class="btn btn-rojo" data-i18n="hero_cta1">📞 Llamar y encargar</a>
+        <a href="#carta" class="btn btn-linea" data-i18n="hero_cta2">Ver la carta</a>
+      </div>
+      <div class="hero-datos">
+        <div class="dato"><strong>13,90 €</strong><span data-i18n="dato1">Pollo entero</span></div>
+        <div class="dato"><strong>7,40 €</strong><span data-i18n="dato2">Menú individual</span></div>
+        <div class="dato"><strong>22,00 €</strong><span data-i18n="dato3">Menú familiar</span></div>
+      </div>
+    </div>
+    <div class="hero-arte">
+      <div class="disco">
+        <svg viewBox="0 0 100 100" aria-hidden="true">
+          <path d="M62 18c4-7 11-9 16-6-1 6-5 8-9 9 6-1 12 2 13 8-6 2-11 1-15-2 5 3 9 8 7 14-6 0-11-4-13-9z" fill="#F7F1E3"/>
+          <path d="M34 40c0-13 11-23 24-23s24 10 24 23c0 11-6 18-14 22l4 25H24l5-25c-8-4-11-11-11-17 0-3 2-5 4-5h16z" fill="#F7F1E3"/>
+          <circle cx="58" cy="35" r="4.4" fill="#1B3A73"/>
+          <circle cx="59.5" cy="34" r="1.8" fill="#F7F1E3"/>
+          <path d="M82 39l14 5-14 6z" fill="#F2A93B"/>
+          <path d="M60 55c0-5 5-9 11-9s11 4 11 10-5 10-11 10-11-5-11-11z" fill="#D8232A"/>
+          <path d="M71 53l2.4 6h6.2l-5 3.6 1.8 6.2-5.4-3.8-5.4 3.8 1.8-6.2-5-3.6h6.2z" fill="#F7F1E3"/>
+        </svg>
+      </div>
+      <div class="burbuja b1"><b>1/2</b> <span data-i18n="bur1">Medio pollo 8,00 €</span></div>
+      <div class="burbuja b2"><b>🥘</b> <span data-i18n="bur2">Paella los domingos</span></div>
+      <div class="burbuja b3"><b>🐖</b> <span data-i18n="bur3">Lechona con patatas</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CINTA ============ -->
+<div class="cinta" aria-hidden="true">
+  <div class="cinta-pista" id="cintaPista"></div>
+</div>
+
+<!-- ============ CARTA ============ -->
+<section id="carta">
+  <div class="wrap">
+    <div class="cabecera-sec">
+      <span class="kicker" data-i18n="k_carta">Nuestra carta</span>
+      <h2 data-i18n="h_carta">Todo lo que sale de la brasa</h2>
+      <p data-i18n="p_carta">Precios por unidad salvo donde se indica €/kg. Algunos platos se preparan solo por encargo.</p>
+    </div>
+    <div class="filtros" id="filtros"></div>
+    <div class="grupos" id="grupos"></div>
+  </div>
+</section>
+
+<!-- ============ MENUS ============ -->
+<section id="menus">
+  <div class="wrap">
+    <div class="cabecera-sec">
+      <span class="kicker" data-i18n="k_menus">Menús</span>
+      <h2 data-i18n="h_menus">Comes tú o come toda la familia</h2>
+      <p data-i18n="p_menus">Todos los menús incluyen patatas normales o aliñadas.</p>
+    </div>
+    <div class="tarjetas-menu">
+      <div class="tarjeta-menu">
+        <div class="icono">👤</div>
+        <h3 data-i18n="menu1_t">Menú individual</h3>
+        <div class="personas" data-i18n="menu1_p">Para 1 persona</div>
+        <div class="precio-grande">7,40 €</div>
+        <ul>
+          <li data-i18n="m1_1">1/4 de pollo</li>
+          <li data-i18n="m1_2">5 nuggets de pollo</li>
+          <li data-i18n="m1_3">4 muslitos de pollo</li>
+          <li data-i18n="m1_4">1 San Jacobo</li>
+          <li data-i18n="m1_5">1 pechuga de pollo</li>
+          <li data-i18n="m1_6">1 filete de merluza</li>
+        </ul>
+        <div class="extra" data-i18n="m1_x1">+2 € — añade croquetas, pimientos o refresco</div>
+        <div class="extra" data-i18n="m1_x2">+2 € — cambia las patatas por verduras a la plancha</div>
+      </div>
+      <div class="tarjeta-menu">
+        <div class="icono">👨‍👩‍👧‍👦</div>
+        <h3 data-i18n="menu2_t">Menú familiar</h3>
+        <div class="personas" data-i18n="menu2_p">Para 4 personas</div>
+        <div class="precio-grande">22,00 €</div>
+        <ul>
+          <li data-i18n="m2_1">1 pollo entero asado</li>
+          <li data-i18n="m2_2">Patatas normales o aliñadas</li>
+          <li data-i18n="m2_3">Salsa de la casa</li>
+          <li data-i18n="m2_4">Alioli</li>
+        </ul>
+        <div class="extra" data-i18n="m2_x1">La opción más rentable: sale a 5,50 € por persona.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ENCARGO ============ -->
+<section id="encargo">
+  <div class="wrap">
+    <div class="cabecera-sec">
+      <span class="kicker" data-i18n="k_encargo">Cómo funciona</span>
+      <h2 data-i18n="h_encargo">Encarga en un minuto</h2>
+      <p data-i18n="p_encargo">Sin apps ni registros. Llamas, dices lo tuyo y pasas a recogerlo.</p>
+    </div>
+    <div class="pasos">
+      <div class="paso">
+        <div class="num">1</div>
+        <h3 data-i18n="paso1_t">Llama por teléfono</h3>
+        <p data-i18n="paso1_p">Dinos qué quieres y a qué hora pasas. Cuanto antes avises, mejor.</p>
+      </div>
+      <div class="paso">
+        <div class="num">2</div>
+        <h3 data-i18n="paso2_t">Lo preparamos</h3>
+        <p data-i18n="paso2_p">Todo se asa al momento para que llegue caliente a tu mesa.</p>
+      </div>
+      <div class="paso">
+        <div class="num">3</div>
+        <h3 data-i18n="paso3_t">Recoge en tienda</h3>
+        <p data-i18n="paso3_p">Ven a la hora acordada y recoge tu encargo en el mostrador.</p>
+      </div>
+    </div>
+    <div class="aviso-llegada">
+      <strong data-i18n="aviso_t">Recoja su encargo aquí</strong>
+      <span data-i18n="aviso_p">— Se atiende por orden de llegada. Los encargos tienen prioridad.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VISITA ============ -->
+<section id="visita">
+  <div class="wrap">
+    <div class="cabecera-sec">
+      <span class="kicker" data-i18n="k_visita">Visítanos</span>
+      <h2 data-i18n="h_visita">Dónde y cuándo</h2>
+    </div>
+    <div class="visita-grid">
+      <div class="bloque">
+        <h3>🕐 <span data-i18n="horario_t">Horario</span></h3>
+        <ul class="horas">
+          <li><span class="dia" data-i18n="d_lu">Lunes</span><span class="rango pendiente">[HORARIO]</span></li>
+          <li><span class="dia" data-i18n="d_ma">Martes</span><span class="rango pendiente">[HORARIO]</span></li>
+          <li><span class="dia" data-i18n="d_mi">Miércoles</span><span class="rango pendiente">[HORARIO]</span></li>
+          <li><span class="dia" data-i18n="d_ju">Jueves</span><span class="rango pendiente">[HORARIO]</span></li>
+          <li><span class="dia" data-i18n="d_vi">Viernes</span><span class="rango pendiente">[HORARIO]</span></li>
+          <li><span class="dia" data-i18n="d_sa">Sábado</span><span class="rango pendiente">[HORARIO]</span></li>
+          <li><span class="dia" data-i18n="d_do">Domingo</span><span class="rango pendiente">[HORARIO]</span></li>
+        </ul>
+      </div>
+      <div class="bloque">
+        <h3>📍 <span data-i18n="contacto_t">Contacto</span></h3>
+        <ul class="contacto">
+          <li>
+            <span class="ico">📍</span>
+            <span><span class="et" data-i18n="c_dir">Dirección</span><span class="val pendiente">[CALLE, NÚMERO — CIUDAD, CP]</span></span>
+          </li>
+          <li>
+            <span class="ico">📞</span>
+            <span><span class="et" data-i18n="c_tel">Teléfono</span><a href="tel:+34000000000" class="val pendiente">[TELÉFONO]</a></span>
+          </li>
+          <li>
+            <span class="ico">💬</span>
+            <span><span class="et">WhatsApp</span><a href="https://wa.me/34000000000" class="val pendiente" target="_blank" rel="noopener">[WHATSAPP]</a></span>
+          </li>
+          <li>
+            <span class="ico">📷</span>
+            <span><span class="et">Instagram</span><a href="#" class="val pendiente" target="_blank" rel="noopener">[@INSTAGRAM]</a></span>
+          </li>
+        </ul>
+        <a href="#" class="btn btn-azul pendiente" style="margin-top:22px" data-i18n="c_mapa">🗺️ Cómo llegar</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ============ PIE ============ -->
+<footer>
+  <div class="wrap">
+    <div class="pie-grid">
+      <div class="pie-col">
+        <span class="marca-txt">
+          <strong>Super Pollo</strong>
+          <span data-i18n="tagline">Comida para llevar · Pollos asados</span>
+        </span>
+        <p class="pie-desc" data-i18n="pie_desc">Pollos asados a la brasa y comida casera para llevar. Recién hechos, todos los días.</p>
+      </div>
+      <div class="pie-col">
+        <h4 data-i18n="pie_nav">Navegación</h4>
+        <ul>
+          <li><a href="#carta" data-i18n="nav_carta">La carta</a></li>
+          <li><a href="#menus" data-i18n="nav_menus">Menús</a></li>
+          <li><a href="#encargo" data-i18n="nav_encargo">Encargos</a></li>
+          <li><a href="#visita" data-i18n="nav_visita">Visítanos</a></li>
+        </ul>
+      </div>
+      <div class="pie-col">
+        <h4 data-i18n="pie_cont">Contacto</h4>
+        <ul>
+          <li class="pendiente">[TELÉFONO]</li>
+          <li class="pendiente">[DIRECCIÓN]</li>
+          <li class="pendiente">[EMAIL]</li>
+        </ul>
+      </div>
+    </div>
+    <div class="pie-abajo">
+      <span>© <span id="anyo"></span> Super Pollo. <span data-i18n="pie_dchos">Todos los derechos reservados.</span></span>
+      <span data-i18n="pie_nota">Precios con IVA incluido. Sujetos a cambios sin previo aviso.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+/* =========================================================
+   SUPER POLLO — lógica de la web
+   - Carta de datos (fácil de editar: todo está en CARTA)
+   - Traducción ES / EN / DE sin recargar
+   - Animaciones con GSAP + ScrollTrigger
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   1. LA CARTA
+   Para cambiar un precio, edítalo aquí y ya está.
+   nota: texto pequeño bajo el nombre. encargo: true = "por encargo"
+   --------------------------------------------------------- */
+const CARTA = [
+  {
+    id: 'principales',
+    titulo: { es: 'Principales', en: 'Mains', de: 'Hauptgerichte' },
+    platos: [
+      { n:{es:"Pollo a l'ast",en:'Spit-roast chicken',de:'Hähnchen vom Grill'}, p:'13,90 €' },
+      { n:{es:'1/2 Pollo',en:'Half chicken',de:'Halbes Hähnchen'}, p:'8,00 €' },
+      { n:{es:'Lechona con patatas',en:'Suckling pig with potatoes',de:'Spanferkel mit Kartoffeln'}, p:'14,90 €' },
+      { n:{es:'Costilla de cerdo con patatas',en:'Pork ribs with potatoes',de:'Schweinerippchen mit Kartoffeln'}, p:'11,95 €' },
+      { n:{es:'Lasaña',en:'Lasagne',de:'Lasagne'}, p:'8,90 €', nota:{es:'Media ración 4,90 €',en:'Half portion €4.90',de:'Halbe Portion 4,90 €'} },
+      { n:{es:'Canelones',en:'Cannelloni',de:'Cannelloni'}, p:'10,50 €', nota:{es:'Media ración 6,50 €',en:'Half portion €6.50',de:'Halbe Portion 6,50 €'} },
+      { n:{es:'Paella',en:'Paella',de:'Paella'}, p:'17,00 €', u:'/kg', nota:{es:'Domingos o por encargo',en:'Sundays or to order',de:'Sonntags oder auf Bestellung'}, encargo:true },
+      { n:{es:'Conejo',en:'Rabbit',de:'Kaninchen'}, p:'19,95 €', encargo:true }
+    ]
+  },
+  {
+    id: 'acompanar',
+    titulo: { es: 'Para acompañar', en: 'Sides', de: 'Beilagen' },
+    platos: [
+      { n:{es:'Patatas normales o aliñadas',en:'Plain or seasoned potatoes',de:'Kartoffeln natur oder gewürzt'}, p:'[?] €', revisar:true },
+      { n:{es:'Patatas al horno',en:'Oven-baked potatoes',de:'Ofenkartoffeln'}, p:'[?] €', u:'/kg', revisar:true },
+      { n:{es:'Tumbet',en:'Tumbet (Mallorcan veg bake)',de:'Tumbet (mallorquinischer Gemüseauflauf)'}, p:'17,00 €', u:'/kg' },
+      { n:{es:'Frito mallorquín',en:'Mallorcan frit',de:'Mallorquinisches Frit'}, p:'20,00 €', u:'/kg' },
+      { n:{es:'Ensaladilla',en:'Russian salad',de:'Russischer Salat'}, p:'17,00 €', u:'/kg' },
+      { n:{es:'Arroz tres delicias',en:'Three delights rice',de:'Drei-Freuden-Reis'}, p:'16,00 €', u:'/kg' },
+      { n:{es:'Macarrones de verduras',en:'Vegetable macaroni',de:'Gemüse-Makkaroni'}, p:'16,00 €', u:'/kg' },
+      { n:{es:'Verduras a la plancha',en:'Grilled vegetables',de:'Gegrilltes Gemüse'}, p:'16,00 €', u:'/kg' }
+    ]
+  },
+  {
+    id: 'complementos',
+    titulo: { es: 'Complementos', en: 'Extras', de: 'Extras' },
+    platos: [
+      { n:{es:'Muslitos de pollo',en:'Chicken drumsticks',de:'Hähnchenkeulen'}, p:'5,50 €' },
+      { n:{es:'Nuggets de pollo',en:'Chicken nuggets',de:'Hähnchen-Nuggets'}, p:'5,50 €' },
+      { n:{es:'Croquetas de pollo o espinacas',en:'Chicken or spinach croquettes',de:'Hähnchen- oder Spinatkroketten'}, p:'5,50 €' },
+      { n:{es:'Pimientos asados',en:'Roast peppers',de:'Gebratene Paprika'}, p:'3,50 €' },
+      { n:{es:'San Jacobo',en:'Ham & cheese cordon bleu',de:'Cordon bleu'}, p:'3,00 €' },
+      { n:{es:'Pechuga de pollo',en:'Chicken breast',de:'Hähnchenbrust'}, p:'3,25 €' },
+      { n:{es:'Filete de merluza',en:'Hake fillet',de:'Seehechtfilet'}, p:'2,95 €' },
+      { n:{es:'Alioli',en:'Aioli',de:'Aioli'}, p:'2,75 €' },
+      { n:{es:'Pan',en:'Bread',de:'Brot'}, p:'1,10 €' },
+      { n:{es:'Pan rústico',en:'Rustic bread',de:'Bauernbrot'}, p:'1,40 €' }
+    ]
+  }
+];
+
+/* Bebidas van en tabla aparte: peq / med / 2 L */
+const BEBIDAS = {
+  columnas: {
+    es: ['Bebida', 'Pequeña', 'Mediana', '2 litros'],
+    en: ['Drink', 'Small', 'Medium', '2 litres'],
+    de: ['Getränk', 'Klein', 'Mittel', '2 Liter']
+  },
+  filas: [
+    { n:{es:'Coca-Cola',en:'Coca-Cola',de:'Coca-Cola'}, v:['1,95 €','2,45 €','2,95 €'] },
+    { n:{es:'Fanta',en:'Fanta',de:'Fanta'}, v:['1,55 €','2,05 €','2,95 €'] },
+    { n:{es:'Aquarius',en:'Aquarius',de:'Aquarius'}, v:['1,75 €','—','2,95 €'] },
+    { n:{es:'Sprite',en:'Sprite',de:'Sprite'}, v:['—','—','[?] €'] },
+    { n:{es:'Nestea',en:'Nestea',de:'Nestea'}, v:['1,75 €','—','2,95 €'] }
+  ],
+  sueltas: [
+    { n:{es:'Cerveza',en:'Beer',de:'Bier'}, p:'2,75 €' },
+    { n:{es:'Vino',en:'Wine',de:'Wein'}, p:'[?] €', revisar:true },
+    { n:{es:'Latas',en:'Cans',de:'Dosen'}, p:'1,95 €' },
+    { n:{es:'Agua',en:'Water',de:'Wasser'}, p:'[?] €', revisar:true },
+    { n:{es:'Agua con gas',en:'Sparkling water',de:'Sprudelwasser'}, p:'1,00 €' },
+    { n:{es:'Red Bull',en:'Red Bull',de:'Red Bull'}, p:'2,25 €' },
+    { n:{es:'Hielo',en:'Ice',de:'Eis'}, p:'[?] €', revisar:true }
+  ]
+};
+
+/* ---------------------------------------------------------
+   2. TRADUCCIONES DE INTERFAZ
+   --------------------------------------------------------- */
+const T = {
+  es: {
+    tagline:'Comida para llevar · Pollos asados',
+    nav_carta:'La carta', nav_menus:'Menús', nav_encargo:'Encargos', nav_visita:'Visítanos',
+    hero_badge:'🔥 Asados al momento cada día',
+    hero_h1a:"Pollo a l'ast", hero_h1b:'recién hecho',
+    hero_lead:'Pollos asados a la brasa, lechona, paella los domingos y comida casera para llevar. Encarga por teléfono y recógelo caliente.',
+    hero_cta1:'📞 Llamar y encargar', hero_cta2:'Ver la carta',
+    dato1:'Pollo entero', dato2:'Menú individual', dato3:'Menú familiar',
+    bur1:'Medio pollo 8,00 €', bur2:'Paella los domingos', bur3:'Lechona con patatas',
+    k_carta:'Nuestra carta', h_carta:'Todo lo que sale de la brasa',
+    p_carta:'Precios por unidad salvo donde se indica €/kg. Algunos platos se preparan solo por encargo.',
+    f_todo:'Ver todo', f_bebidas:'Bebidas',
+    encargo_tag:'Por encargo', otras_bebidas:'Otras bebidas',
+    k_menus:'Menús', h_menus:'Comes tú o come toda la familia',
+    p_menus:'Todos los menús incluyen patatas normales o aliñadas.',
+    menu1_t:'Menú individual', menu1_p:'Para 1 persona',
+    m1_1:'1/4 de pollo', m1_2:'5 nuggets de pollo', m1_3:'4 muslitos de pollo',
+    m1_4:'1 San Jacobo', m1_5:'1 pechuga de pollo', m1_6:'1 filete de merluza',
+    m1_x1:'+2 € — añade croquetas, pimientos o refresco',
+    m1_x2:'+2 € — cambia las patatas por verduras a la plancha',
+    menu2_t:'Menú familiar', menu2_p:'Para 4 personas',
+    m2_1:'1 pollo entero asado', m2_2:'Patatas normales o aliñadas',
+    m2_3:'Salsa de la casa', m2_4:'Alioli',
+    m2_x1:'La opción más rentable: sale a 5,50 € por persona.',
+    k_encargo:'Cómo funciona', h_encargo:'Encarga en un minuto',
+    p_encargo:'Sin apps ni registros. Llamas, dices lo tuyo y pasas a recogerlo.',
+    paso1_t:'Llama por teléfono', paso1_p:'Dinos qué quieres y a qué hora pasas. Cuanto antes avises, mejor.',
+    paso2_t:'Lo preparamos', paso2_p:'Todo se asa al momento para que llegue caliente a tu mesa.',
+    paso3_t:'Recoge en tienda', paso3_p:'Ven a la hora acordada y recoge tu encargo en el mostrador.',
+    aviso_t:'Recoja su encargo aquí', aviso_p:'— Se atiende por orden de llegada. Los encargos tienen prioridad.',
+    k_visita:'Visítanos', h_visita:'Dónde y cuándo',
+    horario_t:'Horario', contacto_t:'Contacto',
+    d_lu:'Lunes', d_ma:'Martes', d_mi:'Miércoles', d_ju:'Jueves', d_vi:'Viernes', d_sa:'Sábado', d_do:'Domingo',
+    c_dir:'Dirección', c_tel:'Teléfono', c_mapa:'🗺️ Cómo llegar',
+    pie_desc:'Pollos asados a la brasa y comida casera para llevar. Recién hechos, todos los días.',
+    pie_nav:'Navegación', pie_cont:'Contacto', pie_dchos:'Todos los derechos reservados.',
+    pie_nota:'Precios con IVA incluido. Sujetos a cambios sin previo aviso.',
+    cinta:["Pollo a l'ast",'Lechona','Paella los domingos','Croquetas caseras','Frito mallorquín','Tumbet','Costilla a la brasa','Conejo por encargo']
+  },
+  en: {
+    tagline:'Takeaway food · Roast chicken',
+    nav_carta:'Menu', nav_menus:'Set menus', nav_encargo:'Orders', nav_visita:'Visit us',
+    hero_badge:'🔥 Freshly roasted every day',
+    hero_h1a:'Spit-roast chicken', hero_h1b:'straight off the grill',
+    hero_lead:'Charcoal-roast chicken, suckling pig, Sunday paella and home-cooked food to take away. Call ahead and pick it up hot.',
+    hero_cta1:'📞 Call to order', hero_cta2:'See the menu',
+    dato1:'Whole chicken', dato2:'Single set menu', dato3:'Family set menu',
+    bur1:'Half chicken €8.00', bur2:'Paella on Sundays', bur3:'Suckling pig with potatoes',
+    k_carta:'Our menu', h_carta:'Everything off the grill',
+    p_carta:'Prices per item unless marked €/kg. Some dishes are made to order only.',
+    f_todo:'See all', f_bebidas:'Drinks',
+    encargo_tag:'To order', otras_bebidas:'Other drinks',
+    k_menus:'Set menus', h_menus:'For one, or for the whole family',
+    p_menus:'Every set menu comes with plain or seasoned potatoes.',
+    menu1_t:'Single set menu', menu1_p:'For 1 person',
+    m1_1:'Quarter chicken', m1_2:'5 chicken nuggets', m1_3:'4 chicken drumsticks',
+    m1_4:'1 cordon bleu', m1_5:'1 chicken breast', m1_6:'1 hake fillet',
+    m1_x1:'+€2 — add croquettes, peppers or a soft drink',
+    m1_x2:'+€2 — swap the potatoes for grilled vegetables',
+    menu2_t:'Family set menu', menu2_p:'For 4 people',
+    m2_1:'1 whole roast chicken', m2_2:'Plain or seasoned potatoes',
+    m2_3:'House sauce', m2_4:'Aioli',
+    m2_x1:'Best value: works out at €5.50 per person.',
+    k_encargo:'How it works', h_encargo:'Order in under a minute',
+    p_encargo:'No apps, no sign-ups. Call, tell us what you want, and come and get it.',
+    paso1_t:'Give us a call', paso1_p:'Tell us what you want and when you are coming. The more notice, the better.',
+    paso2_t:'We cook it', paso2_p:'Everything is roasted to order so it reaches your table hot.',
+    paso3_t:'Pick it up in store', paso3_p:'Come at the agreed time and collect your order at the counter.',
+    aviso_t:'Collect your order here', aviso_p:'— Served on a first-come, first-served basis. Pre-orders get priority.',
+    k_visita:'Visit us', h_visita:'Where and when',
+    horario_t:'Opening hours', contacto_t:'Contact',
+    d_lu:'Monday', d_ma:'Tuesday', d_mi:'Wednesday', d_ju:'Thursday', d_vi:'Friday', d_sa:'Saturday', d_do:'Sunday',
+    c_dir:'Address', c_tel:'Phone', c_mapa:'🗺️ Get directions',
+    pie_desc:'Charcoal-roast chicken and home-cooked takeaway food. Freshly made, every day.',
+    pie_nav:'Navigation', pie_cont:'Contact', pie_dchos:'All rights reserved.',
+    pie_nota:'Prices include VAT. Subject to change without notice.',
+    cinta:['Spit-roast chicken','Suckling pig','Sunday paella','Homemade croquettes','Mallorcan frit','Tumbet','Grilled ribs','Rabbit to order']
+  },
+  de: {
+    tagline:'Essen zum Mitnehmen · Grillhähnchen',
+    nav_carta:'Speisekarte', nav_menus:'Menüs', nav_encargo:'Bestellen', nav_visita:'Besuch uns',
+    hero_badge:'🔥 Täglich frisch vom Grill',
+    hero_h1a:'Hähnchen vom Grill', hero_h1b:'frisch zubereitet',
+    hero_lead:'Hähnchen vom Holzkohlegrill, Spanferkel, sonntags Paella und hausgemachtes Essen zum Mitnehmen. Vorbestellen und heiß abholen.',
+    hero_cta1:'📞 Anrufen und bestellen', hero_cta2:'Zur Speisekarte',
+    dato1:'Ganzes Hähnchen', dato2:'Einzelmenü', dato3:'Familienmenü',
+    bur1:'Halbes Hähnchen 8,00 €', bur2:'Sonntags Paella', bur3:'Spanferkel mit Kartoffeln',
+    k_carta:'Unsere Karte', h_carta:'Alles frisch vom Grill',
+    p_carta:'Preise pro Stück, sofern nicht €/kg angegeben. Einige Gerichte nur auf Vorbestellung.',
+    f_todo:'Alles anzeigen', f_bebidas:'Getränke',
+    encargo_tag:'Auf Bestellung', otras_bebidas:'Weitere Getränke',
+    k_menus:'Menüs', h_menus:'Für dich allein oder für die ganze Familie',
+    p_menus:'Alle Menüs mit Kartoffeln natur oder gewürzt.',
+    menu1_t:'Einzelmenü', menu1_p:'Für 1 Person',
+    m1_1:'1/4 Hähnchen', m1_2:'5 Hähnchen-Nuggets', m1_3:'4 Hähnchenkeulen',
+    m1_4:'1 Cordon bleu', m1_5:'1 Hähnchenbrust', m1_6:'1 Seehechtfilet',
+    m1_x1:'+2 € — Kroketten, Paprika oder ein Softdrink dazu',
+    m1_x2:'+2 € — Kartoffeln gegen gegrilltes Gemüse tauschen',
+    menu2_t:'Familienmenü', menu2_p:'Für 4 Personen',
+    m2_1:'1 ganzes Grillhähnchen', m2_2:'Kartoffeln natur oder gewürzt',
+    m2_3:'Hausgemachte Sauce', m2_4:'Aioli',
+    m2_x1:'Bestes Preis-Leistungs-Verhältnis: 5,50 € pro Person.',
+    k_encargo:'So geht’s', h_encargo:'In einer Minute bestellt',
+    p_encargo:'Keine App, keine Anmeldung. Anrufen, bestellen, abholen.',
+    paso1_t:'Ruf uns an', paso1_p:'Sag uns, was du möchtest und wann du kommst. Je früher, desto besser.',
+    paso2_t:'Wir bereiten alles zu', paso2_p:'Alles wird frisch gegrillt, damit es heiß bei dir ankommt.',
+    paso3_t:'Im Laden abholen', paso3_p:'Komm zur vereinbarten Zeit und hol deine Bestellung an der Theke ab.',
+    aviso_t:'Bestellung hier abholen', aviso_p:'— Bedienung in der Reihenfolge des Eintreffens. Vorbestellungen haben Vorrang.',
+    k_visita:'Besuch uns', h_visita:'Wo und wann',
+    horario_t:'Öffnungszeiten', contacto_t:'Kontakt',
+    d_lu:'Montag', d_ma:'Dienstag', d_mi:'Mittwoch', d_ju:'Donnerstag', d_vi:'Freitag', d_sa:'Samstag', d_do:'Sonntag',
+    c_dir:'Adresse', c_tel:'Telefon', c_mapa:'🗺️ Route planen',
+    pie_desc:'Hähnchen vom Holzkohlegrill und hausgemachtes Essen zum Mitnehmen. Täglich frisch.',
+    pie_nav:'Navigation', pie_cont:'Kontakt', pie_dchos:'Alle Rechte vorbehalten.',
+    pie_nota:'Preise inkl. MwSt. Änderungen vorbehalten.',
+    cinta:['Hähnchen vom Grill','Spanferkel','Sonntags Paella','Hausgemachte Kroketten','Mallorquinisches Frit','Tumbet','Rippchen vom Grill','Kaninchen auf Bestellung']
+  }
+};
+
+/* ---------------------------------------------------------
+   3. ESTADO Y RENDERIZADO
+   --------------------------------------------------------- */
+let lang = 'es';
+let filtro = 'todo';
+
+const $  = (s, c = document) => c.querySelector(s);
+const $ = (s, c = document) => Array.from(c.querySelectorAll(s));
+const esc = s => String(s).replace(/[&<>"]/g, m => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;' }[m]));
+
+function pintaFiltros() {
+  const t = T[lang];
+  const botones = [{ id:'todo', tx:t.f_todo }]
+    .concat(CARTA.map(g => ({ id:g.id, tx:g.titulo[lang] })))
+    .concat([{ id:'bebidas', tx:t.f_bebidas }]);
+
+  $('#filtros').innerHTML = botones.map(b =>
+    `<button data-f="${b.id}" class="${b.id === filtro ? 'on' : ''}">${esc(b.tx)}</button>`
+  ).join('');
+
+  $('#filtros button').forEach(b => b.addEventListener('click', () => {
+    filtro = b.dataset.f;
+    pintaFiltros();
+    pintaCarta();
+  }));
+}
+
+function tarjetaPlato(pl) {
+  const nota = pl.nota ? `<span class="plato-nota">${esc(pl.nota[lang])}</span>` : '';
+  const tag  = pl.encargo ? `<span class="marca-encargo">${esc(T[lang].encargo_tag)}</span>` : '';
+  const unidad = pl.u ? `<small>${esc(pl.u)}</small>` : '';
+  const clase = pl.revisar ? ' pendiente' : '';
+  return `<article class="plato">
+    <div class="plato-txt">
+      <span class="plato-nombre">${esc(pl.n[lang])}</span>${nota}${tag}
+    </div>
+    <div class="plato-precio${clase}">${esc(pl.p)}${unidad}</div>
+  </article>`;
+}
+
+function bloqueBebidas() {
+  const t = T[lang];
+  const cols = BEBIDAS.columnas[lang];
+  const cabeza = cols.map(c => `<th>${esc(c)}</th>`).join('');
+  const cuerpo = BEBIDAS.filas.map(f =>
+    `<tr><td>${esc(f.n[lang])}</td>` +
+    f.v.map(v => `<td class="${v === '—' ? 'vacio' : ''}">${esc(v)}</td>`).join('') +
+    `</tr>`
+  ).join('');
+
+  return `<div class="grupo" data-grupo="bebidas">
+    <h3>${esc(t.f_bebidas)}</h3>
+    <div class="tabla-bebidas">
+      <table><thead><tr>${cabeza}</tr></thead><tbody>${cuerpo}</tbody></table>
+    </div>
+    <h3 style="margin-top:32px;font-size:1.25rem">${esc(t.otras_bebidas)}</h3>
+    <div class="platos">${BEBIDAS.sueltas.map(tarjetaPlato).join('')}</div>
+  </div>`;
+}
+
+function pintaCarta() {
+  let html = '';
+  CARTA.forEach(g => {
+    if (filtro !== 'todo' && filtro !== g.id) return;
+    html += `<div class="grupo" data-grupo="${g.id}">
+      <h3>${esc(g.titulo[lang])}</h3>
+      <div class="platos">${g.platos.map(tarjetaPlato).join('')}</div>
+    </div>`;
+  });
+  if (filtro === 'todo' || filtro === 'bebidas') html += bloqueBebidas();
+
+  $('#grupos').innerHTML = html;
+  animaPlatos();
+}
+
+function pintaCinta() {
+  const items = T[lang].cinta;
+  const uno = items.map(i => `<span>${esc(i)}</span>`).join('');
+  $('#cintaPista').innerHTML = uno + uno; // duplicado para bucle sin costuras
+}
+
+function aplicaIdioma(l) {
+  lang = l;
+  document.documentElement.lang = l;
+  const t = T[l];
+
+  $('[data-i18n]').forEach(el => {
+    const k = el.dataset.i18n;
+    if (t[k] !== undefined) el.textContent = t[k];
+  });
+
+  $('.idiomas button').forEach(b => b.classList.toggle('on', b.dataset.lang === l));
+  try { localStorage.setItem('sp_lang', l); } catch (e) {}
+
+  pintaCinta();
+  pintaFiltros();
+  pintaCarta();
+}
+
+/* ---------------------------------------------------------
+   4. ANIMACIONES (GSAP + ScrollTrigger)
+   --------------------------------------------------------- */
+const sinMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function animaPlatos() {
+  if (sinMovimiento || typeof gsap === 'undefined') return;
+  gsap.from('#grupos .plato, #grupos .tabla-bebidas', {
+    y: 22, opacity: 0, duration: 0.5, stagger: 0.035, ease: 'power2.out', overwrite: true
+  });
+}
+
+function animaEntrada() {
+  if (sinMovimiento || typeof gsap === 'undefined') return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Hero
+  const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+  tl.from('.etiqueta',      { y: 20, opacity: 0, duration: 0.5 })
+    .from('.hero h1 > *',   { y: 40, opacity: 0, duration: 0.7, stagger: 0.09 }, '-=0.25')
+    .from('.hero p.lead',   { y: 24, opacity: 0, duration: 0.6 }, '-=0.4')
+    .from('.hero-acciones .btn', { y: 20, opacity: 0, duration: 0.5, stagger: 0.08 }, '-=0.35')
+    .from('.dato',          { y: 18, opacity: 0, duration: 0.5, stagger: 0.08 }, '-=0.3')
+    .from('.disco',         { scale: 0.82, opacity: 0, duration: 0.8, ease: 'back.out(1.6)' }, '-=1.1')
+    .from('.burbuja',       { y: 16, opacity: 0, duration: 0.5, stagger: 0.1 }, '-=0.4');
+
+  // Flotación suave de las burbujas
+  gsap.to('.burbuja', { y: '-=9', duration: 2.4, ease: 'sine.inOut', yoyo: true, repeat: -1, stagger: 0.4 });
+
+  // Secciones al hacer scroll
+  $('.cabecera-sec').forEach(el => {
+    gsap.from(el, {
+      scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none reverse' },
+      y: 40, opacity: 0, duration: 0.7, ease: 'power2.out'
+    });
+  });
+
+  gsap.from('.tarjeta-menu', {
+    scrollTrigger: { trigger: '.tarjetas-menu', start: 'top 82%' },
+    y: 50, opacity: 0, duration: 0.7, stagger: 0.12, ease: 'power2.out'
+  });
+
+  gsap.from('.paso', {
+    scrollTrigger: { trigger: '.pasos', start: 'top 84%' },
+    y: 44, opacity: 0, duration: 0.6, stagger: 0.1, ease: 'back.out(1.4)'
+  });
+
+  gsap.from('.aviso-llegada', {
+    scrollTrigger: { trigger: '.aviso-llegada', start: 'top 90%' },
+    scale: 0.94, opacity: 0, duration: 0.6, ease: 'power2.out'
+  });
+
+  gsap.from('.bloque', {
+    scrollTrigger: { trigger: '.visita-grid', start: 'top 82%' },
+    y: 46, opacity: 0, duration: 0.7, stagger: 0.12, ease: 'power2.out'
+  });
+}
+
+/* ---------------------------------------------------------
+   5. ARRANQUE
+   --------------------------------------------------------- */
+document.addEventListener('DOMContentLoaded', () => {
+  $('#anyo').textContent = new Date().getFullYear();
+
+  // Idioma: guardado > navegador > español
+  let inicial = 'es';
+  try { inicial = localStorage.getItem('sp_lang') || ''; } catch (e) {}
+  if (!inicial) {
+    const nav = (navigator.language || 'es').slice(0, 2);
+    inicial = ['es', 'en', 'de'].includes(nav) ? nav : 'es';
+  }
+  aplicaIdioma(inicial);
+
+  $('.idiomas button').forEach(b =>
+    b.addEventListener('click', () => aplicaIdioma(b.dataset.lang))
+  );
+
+  // Menú móvil
+  const ham = $('#hamburguesa');
+  const nav = $('#menuNav');
+  ham.addEventListener('click', () => {
+    const abierto = nav.classList.toggle('abierto');
+    ham.classList.toggle('abierto', abierto);
+    ham.setAttribute('aria-expanded', String(abierto));
+  });
+  $('#menuNav a').forEach(a => a.addEventListener('click', () => {
+    nav.classList.remove('abierto');
+    ham.classList.remove('abierto');
+    ham.setAttribute('aria-expanded', 'false');
+  }));
+
+  animaEntrada();
+});
+</script>
+</body>
+</html>
